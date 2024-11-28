@@ -1,0 +1,43 @@
+<div class="flex flex-col justify-center items-center w-full min-h-screen bg-gray-100">
+
+    <div class="mb-6 flex gap-4 justify-center items-center w-full px-4">
+      <rym-button class="rounded-md shadow-md" ></rym-button>
+      <rym-search (search)="searchCharacter($event)"  class="w-full max-w-xs"></rym-search>
+    </div>
+  
+  
+    <div class="flex justify-center items-center w-full max-w-7xl px-4 mb-10">
+      <div class="flex gap-4">
+        <button type="button" (click)="paginaAnterior()" [disabled]="!prevPageUrl"
+          class="transition ease-in-out focus:outline-none text-white bg-purple-600 hover:bg-purple-700 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-6 py-3">
+          Anterior
+        </button>
+    
+        <button (click)="paginaSiguiente()" [disabled]="!nextPageUrl"
+          class="transition ease-in-out focus:outline-none text-white bg-green-600 hover:bg-green-700 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-6 py-3">
+          Siguiente
+        </button>
+      </div>
+    </div>
+  
+    
+    <div class="flex justify-center items-center w-full max-w-7xl px-4 mb-8">
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 w-full">
+        <div *ngFor="let character of characters" class="character-card bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+          <img [src]="character.image" class="w-full h-64 object-cover" alt="{{ character.name }}">
+          <div class="character-info p-4">
+            <h3 class="text-xl font-semibold text-gray-800">{{ character.name }}</h3>
+            <p class="text-sm text-gray-600"><strong>Estado:</strong> 
+              <span [ngClass]="{'bg-red-600': character.status === 'Dead', 'bg-green-600': character.status === 'Alive', 'bg-blue-600': character.status === 'unknown'}" 
+                    class="w-2.5 h-2.5 inline-block rounded-full mr-2"></span>
+              {{ character.status }}
+            </p>
+            <p class="text-sm text-gray-600"><strong>Especie:</strong> {{ character.species }}</p>
+            <p class="text-sm text-gray-600"><strong>Ubicación:</strong> {{ character.location.name }}</p>
+          </div>
+        </div>
+      </div>
+    </div> 
+  </div>
+  
+  
